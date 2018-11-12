@@ -17,6 +17,10 @@ default: build
 
 build: $(bin)/$(app)
 
+install: build
+	cp $(bin)/$(app) /usr/local/bin/$(app)
+	chmod u+s /usr/local/bin/$(app)
+
 clean:
 	rm -fr $(build)/* $(bin)/*
 
@@ -26,4 +30,4 @@ $(bin)/$(app): $(objects)
 $(build)/%.o: $(src)/%.c
 	$(cc) $(cflags) -c $< -o $@
 
-.PHONY: default build clean
+.PHONY: default build install clean
